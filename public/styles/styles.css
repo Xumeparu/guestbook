@@ -1,0 +1,83 @@
+#wrapper {
+    width: 100%;
+    max-width: 1024px;
+    padding: 2%;
+    margin: 0 auto;
+}
+
+header {
+    top: 0;
+    padding: 2%;
+}
+
+.logo {
+    width: 100px;
+}
+
+body {
+    color: #d26664;
+}
+
+.username {
+    height: 20px;
+    width: 400px;
+}
+
+.message {
+    height: 250px;
+    width: 400px;
+
+    resize: none;
+}
+
+nav a {
+    text-decoration: none;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    list-style-position: inside;
+    font: 12pt 'Consolas', serif;
+    padding: 10px;
+}
+
+.top-menu li {
+    display: inline-block;
+    margin: 0;
+}
+
+.top-menu a:hover {
+    background: #d26664;
+    color: #ffffff;
+}
+
+.top-menu a:focus {
+    background: #d26664;
+    color: #ffffff;
+}
+
+.top-menu a {
+    padding: 10px 30px;
+    color: #7e7e7e;
+}
+
+footer {
+    background: #d26664;
+    color: #ffffff;
+    font-size: 12pt;
+    position: absolute;
+    bottom: 0;
+}
+
+#footer {
+    width: 980px;
+    height: 70px;
+
+    max-width: 1024px;
+    padding: 2%;
+    margin: 0 auto;
+}
