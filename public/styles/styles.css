@@ -15,19 +15,28 @@ header {
 }
 
 body {
+    font: 12pt 'Consolas', serif;
     color: #d26664;
 }
 
+input {
+    font: 12pt 'Consolas', serif;
+}
+
 .username {
-    height: 20px;
-    width: 400px;
+    height: 30px;
+    width: 200px;
 }
 
 .message {
-    height: 250px;
-    width: 400px;
+    height: 30px;
+    width: 200px;
 
     resize: none;
+}
+
+.user-message {
+    list-style: none;
 }
 
 nav a {
@@ -62,6 +71,23 @@ nav li {
 
 .top-menu a {
     padding: 10px 30px;
+    color: #7e7e7e;
+}
+
+.submitBtn {
+    font: 12pt 'Consolas', serif;
+
+    height: 30px;
+    width: 100px;
+
+    border: none;
+    outline: none;
+
+    color: #ffffff;
+    background: #d26664;
+}
+
+.submitBtn:active {
     color: #7e7e7e;
 }
 
