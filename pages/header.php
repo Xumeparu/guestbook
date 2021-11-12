@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Home</title>
+    <title>Домашняя страница</title>
     <link rel="stylesheet" href="../public/styles/styles.css" type="text/css"/>
 </head>
 <body>

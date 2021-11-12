@@ -1,6 +1,6 @@
 <?php require_once "pages/header.php"; ?>
 <?php require_once "pages/navigation.php"; ?>
-    <h1>Guestbook page</h1>
+    <h1>Гостевая книга</h1>
 
     <form action="guestbook.php" method="post">
         <label>
