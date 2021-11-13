@@ -15,6 +15,20 @@
 <?php
 $db = "db.txt";
 
+$link = mysqli_connect('localhost', 'root', '', 'guestbookdb');
+
+if (!$link) {
+    die('<p style="color:#9a1f1f">' .mysqli_connect_errno().' - '.mysqli_connect_error().'</p>');
+}
+
+$result = mysqli_query($link, "SELECT * FROM messages;");
+
+echo '<p>Все пользователи: </p><ul>';
+while ($row = mysqli_fetch_row($result)) {
+    echo "<li>{$row[1]}: {$row[2]}, {$row[3]}</li>";
+}
+echo '</ul>';
+
 if (isset($_POST["username"]) && isset($_POST["message"])) {
     $username_field = $_POST["username"];
     $message_field = $_POST["message"];
