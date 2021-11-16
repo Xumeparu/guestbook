@@ -23,7 +23,7 @@ if (!$link) {
 
 $result = mysqli_query($link, "SELECT * FROM messages;");
 
-echo '<p>Все пользователи: </p><ul>';
+echo '<ul>';
 while ($row = mysqli_fetch_row($result)) {
     echo "<li>{$row[1]}: {$row[2]}, {$row[3]}</li>";
 }
@@ -54,17 +54,4 @@ foreach ($messages_strings as $message_string) {
     ];
 }
 ?>
-
-    <ul>
-        <?php
-        foreach ($messages as $message) {
-            ?>
-            <li class="user-message">
-                <b><?=$message["username"]; ?></b>:
-                <?=$message["message"]; ?>
-            </li>
-            <?php
-        }
-        ?>
-    </ul>
 <?php require_once "pages/footer.php"; ?>

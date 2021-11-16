@@ -23,6 +23,10 @@ input {
     font: 12pt 'Consolas', serif;
 }
 
+ul {
+    list-style: none;
+}
+
 .username {
     height: 30px;
     width: 200px;
