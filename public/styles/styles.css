@@ -118,6 +118,16 @@ nav li {
     color: #7e7e7e;
 }
 
+.success {
+    font: 16pt 'Consolas', bold;
+    color: #4b9cce;
+}
+
+.error {
+    font: 16pt 'Consolas', bold;
+    color: #ffb200;
+}
+
 footer {
     background: #d26664;
     color: #ffffff;
