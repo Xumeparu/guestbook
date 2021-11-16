@@ -1,15 +1,15 @@
 <?php require_once "pages/header.php"; ?>
 <?php require_once "pages/navigation.php"; ?>
-    <h1>Регистрация</h1>
+    <h1>Аутентификация</h1>
 
-    <form action="registration.php" method="post">
+    <form action="authentication.php" method="post">
         <label>
             <input class="username" name="username" placeholder="Имя пользователя"/>
         </label>
         <label>
             <input class="password" name="password" type="password" placeholder="Пароль"/>
         </label>
-        <button class="regBtn" type="submit">Зарегистрироваться</button>
+        <button class="enterBtn" type="submit">Войти</button>
     </form>
 
 <?php
@@ -28,11 +28,15 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
         : "";
 
     if (!empty($username) && !empty($password)) {
-        $link->query("INSERT INTO users(username, password) VALUES ('$username', md5('$password'))");
-        if ($link->affected_rows == 1) {
-            echo "<p class='success'>Регистрация успешна</p>";
-        } else {
-            echo "<p class='error'>Ты мышь, получается, раз не смог зарегистрироваться " . $link->error . "</p>";
+        $result = mysqli_query($link,"SELECT password FROM users WHERE username='$username'");
+        $row = mysqli_fetch_row($result);
+
+        if ($row[0] === md5($password)) {
+            if ($link->affected_rows == 1) {
+                echo "<p class='success'>Добро пожаловать</p>";
+            } else {
+                echo "<p class='error'>Ты мышь, получается, раз не смог войти в профиль " . $link->error . "</p>";
+            }
         }
     }
 }

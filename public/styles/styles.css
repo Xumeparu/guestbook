@@ -88,7 +88,7 @@ nav li {
     color: #7e7e7e;
 }
 
-.submitBtn {
+.submitBtn, .enterBtn {
     font: 12pt 'Consolas', serif;
 
     height: 30px;
@@ -114,7 +114,7 @@ nav li {
     background: #d26664;
 }
 
-.submitBtn:active, .regBtn:active {
+.submitBtn:active, .regBtn:active, .enterBtn:active {
     color: #7e7e7e;
 }
 
