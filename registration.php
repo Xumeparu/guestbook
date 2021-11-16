@@ -7,7 +7,7 @@
         <input class="username" name="username" placeholder="Имя пользователя"/>
     </label>
     <label>
-        <input class="password" name="message" placeholder="Пароль"/>
+        <input class="password" name="message" type="password" placeholder="Пароль"/>
     </label>
     <button class="regBtn" type="submit">Зарегистрироваться</button>
 </form>
