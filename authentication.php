@@ -1,5 +1,5 @@
 <?php require_once "pages/header.php"; ?>
-<?php require_once "pages/navigation.php"; ?>
+<?php require_once "db.php"; ?>
     <h1>Аутентификация</h1>
 
     <form action="authentication.php" method="post">
@@ -11,12 +11,15 @@
         </label>
         <button class="enterBtn" type="submit">Войти</button>
     </form>
+<label>
+    <a href="registration.php" class="link">Зарегистрироваться</a>
+</label>
 
 <?php
 $link = mysqli_connect('localhost', 'root', '', 'guestbookdb');
 
 if (!$link) {
-    die('<p style="color:#9a1f1f">' .mysqli_connect_errno().' - '.mysqli_connect_error().'</p>');
+    die('<p style="color:#ffb200">' .mysqli_connect_errno().' - '.mysqli_connect_error().'</p>');
 }
 
 if (isset($_POST["username"]) && isset($_POST["password"])) {
@@ -28,16 +31,12 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
         : "";
 
     if (!empty($username) && !empty($password)) {
-        $result = mysqli_query($link,"SELECT password FROM users WHERE username='$username'");
-        $row = mysqli_fetch_row($result);
-
-        if ($row[0] === md5($password)) {
-            if ($link->affected_rows == 1) {
-                echo "<p class='success'>Добро пожаловать</p>";
-            } else {
-                echo "<p class='error'>Ты мышь, получается, раз не смог войти в профиль " . $link->error . "</p>";
-            }
-        }
+        checkAuth($username, $password);
+        header("Location: http://"
+            .$_SERVER['HTTP_HOST']
+            .dirname($_SERVER['PHP_SELF'])
+            ."./index.php");
+        exit;
     }
 }
 ?>

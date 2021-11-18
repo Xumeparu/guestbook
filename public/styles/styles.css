@@ -118,6 +118,17 @@ nav li {
     color: #7e7e7e;
 }
 
+.link, .link:active, .link:visited {
+    font: 16pt 'Consolas', serif;
+
+    color: #d26664;
+    text-decoration: none;
+}
+
+.link:hover {
+    color: #7e7e7e;
+}
+
 .success {
     font: 16pt 'Consolas', bold;
     color: #4b9cce;

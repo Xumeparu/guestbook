@@ -16,7 +16,7 @@
 $link = mysqli_connect('localhost', 'root', '', 'guestbookdb');
 
 if (!$link) {
-    die('<p style="color:#9a1f1f">' .mysqli_connect_errno().' - '.mysqli_connect_error().'</p>');
+    die('<p style="color:#ffb200">' .mysqli_connect_errno().' - '.mysqli_connect_error().'</p>');
 }
 
 if (isset($_POST["username"]) && isset($_POST["message"])) {
