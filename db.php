@@ -37,7 +37,7 @@ function getUsername() {
     $result = mysqli_query($link,"SELECT username FROM users WHERE id='$_SESSION[user_id]'");
     $row = mysqli_fetch_row($result);
 
-    echo $row[0];
+    return $row[0];
 }
 
 function sendMessage($message) {
@@ -61,4 +61,8 @@ function getMessages() {
     }
 
     return $messages;
+}
+
+function checkIsLogged(): string {
+    return isset($_SESSION['user_id']);
 }

@@ -24,11 +24,7 @@
     </ul>
 
 <?php
-$link = mysqli_connect('localhost', 'root', '', 'guestbookdb');
-
-if (!$link) {
-    die('<p style="color:#ffb200">' .mysqli_connect_errno().' - '.mysqli_connect_error().'</p>');
-}
+global $link;
 
 if (isset($_POST["message"])) {
     $message = $_POST["message"]
