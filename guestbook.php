@@ -1,16 +1,27 @@
 <?php require_once "pages/header.php"; ?>
 <?php require_once "pages/navigation.php"; ?>
+<?php require_once "db.php"; ?>
     <h1>Гостевая книга</h1>
 
     <form action="guestbook.php" method="post">
-        <label>
-            <input class="username" name="username" placeholder="Имя"/>
-        </label>
+        <p class='success'><?=getUsername(); ?></p>
         <label>
             <input class="message" name="message" placeholder="Сообщение"/>
         </label>
         <button class="submitBtn" type="submit">Отправить</button>
     </form>
+
+    <ul>
+        <?php
+        foreach (getMessages() as $message_item) {
+            ?><li>
+                <?=$message_item["username"]?>:
+                <?=$message_item["message_text"]?>,
+                <?=$message_item["send_date"]?>
+            </li><?php
+        }
+        ?>
+    </ul>
 
 <?php
 $link = mysqli_connect('localhost', 'root', '', 'guestbookdb');
@@ -19,29 +30,14 @@ if (!$link) {
     die('<p style="color:#ffb200">' .mysqli_connect_errno().' - '.mysqli_connect_error().'</p>');
 }
 
-if (isset($_POST["username"]) && isset($_POST["message"])) {
-    $username = $_POST["username"]
-        ? trim(mysqli_real_escape_string($link, $_POST["username"]))
-        : "";
+if (isset($_POST["message"])) {
     $message = $_POST["message"]
         ? trim(mysqli_real_escape_string($link, $_POST["message"]))
         : "";
 
-    if (!empty($username) && !empty($message)) {
-        $link->query("INSERT INTO messages(username, message_text) VALUES ('$username', '$message')");
-        if ($link->affected_rows == 1) {
-            echo "<p class='success'>Отправлено</p>";
-        } else {
-            echo "<p class='error'>Ты мышь, получается, раз не отправилось " . $link->error . "</p>";
-        }
+    if (!empty($message)) {
+        sendMessage($message);
     }
 }
-
-$result = mysqli_query($link, "SELECT * FROM messages;");
-echo '<ul>';
-while ($row = mysqli_fetch_row($result)) {
-    echo "<li>{$row[1]}: {$row[2]}, {$row[3]}</li>";
-}
-echo '</ul>';
 ?>
 <?php require_once "pages/footer.php"; ?>
