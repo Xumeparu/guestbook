@@ -49,20 +49,26 @@ function getMessages() {
     global $link;
     $messages = [];
 
-    $result = mysqli_query($link, "SELECT users.username, messages.message_text, messages.send_date 
+    $result = mysqli_query($link, "SELECT messages.id, users.id, users.username, messages.message_text, messages.send_date 
                                          FROM messages INNER JOIN users 
                                          ON messages.user_id = users.id ORDER BY messages.send_date");
     while ($row = mysqli_fetch_row($result)) {
         $messages[] = [
-            "username" => $row[0],
-            "message_text" => $row[1],
-            "send_date" => $row[2],
+            "id" => $row[0],
+            "user_id" => $row[1],
+            "username" => $row[2],
+            "message_text" => $row[3],
+            "send_date" => $row[4]
         ];
     }
 
-    return $messages;
+    return array_reverse($messages);
 }
 
 function checkIsLogged(): string {
     return isset($_SESSION['user_id']);
+}
+
+function getCurrentUserId() {
+    return $_SESSION['user_id'];
 }

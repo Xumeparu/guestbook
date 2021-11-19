@@ -27,6 +27,11 @@ ul {
     list-style: none;
 }
 
+li {
+    min-height: 30px;
+    max-height: 30px;
+}
+
 .username {
     height: 30px;
     width: 200px;
@@ -35,6 +40,10 @@ ul {
 .password {
     height: 30px;
     width: 200px;
+}
+
+.user {
+    color: #4b9cce;
 }
 
 .message {
@@ -46,6 +55,14 @@ ul {
 
 .user-message {
     list-style: none;
+}
+
+.messages {
+    max-height: 300px;
+    min-height: 300px;
+
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
 nav a {
@@ -127,6 +144,17 @@ nav li {
 
 .link:hover {
     color: #7e7e7e;
+}
+
+.deleteBtn, .deleteBtn:active, .deleteBtn:visited {
+    font: 16pt 'Consolas', serif;
+
+    color: #7e7e7e;
+    text-decoration: none;
+}
+
+.deleteBtn:hover {
+    color: #52000f;
 }
 
 .success {
