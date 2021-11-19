@@ -14,6 +14,11 @@ header {
     width: 100px;
 }
 
+.homePage {
+    margin-left: 2%;
+    width: 100px;
+}
+
 body {
     font: 12pt 'Consolas', serif;
     color: #d26664;
