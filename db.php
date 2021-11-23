@@ -1,7 +1,8 @@
 <?php
 session_start();
 
-$link = mysqli_connect('localhost', 'root', '', 'guestbookdb');
+//$link = mysqli_connect('localhost', 'root', '', 'guestbookdb');
+$link = mysqli_connect('localhost', 'debian-sys-maint', 'YUOULJpihCP0s1xY', 'guestbookdb');
 
 if (!$link) {
     die('<p class="error">' .mysqli_connect_errno().' - '.mysqli_connect_error().'</p>');

@@ -26,6 +26,9 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
         ? trim(mysqli_real_escape_string($link, $_POST["password"]))
         : "";
 
+    $username = htmlspecialchars($username, ENT_HTML5);
+    $password = htmlspecialchars($password, ENT_HTML5);
+
     if (!empty($username) && !empty($password)) {
         checkAuth($username, $password);
         header("Location: http://"

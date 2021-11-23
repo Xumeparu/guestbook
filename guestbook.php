@@ -19,6 +19,8 @@ if (isset($_POST["message"])) {
         ? trim(mysqli_real_escape_string($link, $_POST["message"]))
         : "";
 
+    $message = htmlspecialchars($message, ENT_HTML5);
+
     if (!empty($message)) {
         sendMessage($message);
     }
