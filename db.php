@@ -1,69 +1,78 @@
 <?php
 session_start();
 
-//$link = mysqli_connect('localhost', 'root', '', 'guestbookdb');
-$link = mysqli_connect('localhost', 'debian-sys-maint', 'YUOULJpihCP0s1xY', 'guestbookdb');
-
-if (!$link) {
-    die('<p class="error">' .mysqli_connect_errno().' - '.mysqli_connect_error().'</p>');
+try {
+    $conn = new PDO('mysql:host=localhost;dbname=guestbookdb', 'debian-sys-maint', 'YUOULJpihCP0s1xY');
+} catch(PDOException $error) {
+    die('<p class="error">' . $error->getMessage() . '</p>');
 }
 
 function checkAuth($username, $password) {
-    global $link;
-    $result = mysqli_query($link,"SELECT id, password FROM users WHERE username='$username'");
-    $row = mysqli_fetch_row($result);
+    global $conn;
 
-    if ($row[1] === md5($password)) {
-        $_SESSION['user_id'] = $row[0];
-        echo "<p class='success'>Добро пожаловать</p>";
-    } else {
-        echo "<p class='error'>Ты мышь, получается, раз не смог войти в профиль " . mysqli_error($link) . "</p>";
+    $stmt = $conn->prepare("SELECT * FROM users WHERE username=:username");
+    $stmt->execute(["username" => $username]);
+
+    $row = $stmt->fetch(PDO::FETCH_LAZY);
+
+    if ($row["password"] === md5($password)) {
+        $_SESSION['user_id'] = $row["id"];
     }
 }
 
 function checkReg($username, $password) {
-    global $link;
-    $link->query("INSERT INTO users(username, password) VALUES ('$username', md5('$password'))");
+    global $conn;
 
-    if ($link->affected_rows == 1) {
-        echo "<p class='success'>Регистрация успешна</p>";
-    } else {
-        echo "<p class='error'>Ты мышь, получается, раз не смог зарегистрироваться " . $link->error . "</p>";
-    }
+    $stmt = $conn->prepare("INSERT INTO users(username, password) VALUES (:username, md5(:password))");
+    $stmt->execute(["username" => $username, "password" => $password]);
 }
 
 function getUsername() {
-    global $link;
+    global $conn;
 
-    $result = mysqli_query($link,"SELECT username FROM users WHERE id='$_SESSION[user_id]'");
-    $row = mysqli_fetch_row($result);
+    $stmt = $conn->prepare("SELECT username FROM users WHERE id='$_SESSION[user_id]'");
+    $stmt->execute(["id" => $_SESSION["user_id"]]);
 
-    return $row[0];
+    $row = $stmt->fetch(PDO::FETCH_LAZY);
+
+    return $row["username"];
 }
 
 function sendMessage($message) {
-    global $link;
-    $link->query("INSERT INTO messages(user_id, message_text) VALUES ('$_SESSION[user_id]', '$message')");
+    global $conn;
+
+    $sql = "INSERT INTO messages (user_id, message_text) VALUES (:user_id, :message_text)";
+    $params = [
+        ":user_id" => $_SESSION["user_id"],
+        ":message_text" => $message
+    ];
+    $stmt = $conn->prepare($sql);
+    $stmt->execute($params);
+
 }
 
 function getMessages() {
-    global $link;
-    $messages = [];
-
-    $result = mysqli_query($link, "SELECT messages.id, users.id, users.username, messages.message_text, messages.send_date 
-                                         FROM messages INNER JOIN users 
-                                         ON messages.user_id = users.id ORDER BY messages.send_date");
-    while ($row = mysqli_fetch_row($result)) {
-        $messages[] = [
-            "id" => $row[0],
-            "user_id" => $row[1],
-            "username" => $row[2],
-            "message_text" => $row[3],
-            "send_date" => $row[4]
-        ];
-    }
-
-    return array_reverse($messages);
+//    global $conn;
+//    $messages = [];
+//
+//    $sql = "SELECT messages.id, users.id, users.username, messages.message_text, messages.send_date
+//                FROM messages INNER JOIN users
+//                ON messages.user_id = users.id ORDER BY messages.send_date";
+//    $messages = $conn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+//    foreach ($messages as )
+//
+//    $stmt = $conn->prepare($sql);
+//    while ($row = mysqli_fetch_row($result)) {
+//        $messages[] = [
+//            "id" => $row[0],
+//            "user_id" => $row[1],
+//            "username" => $row[2],
+//            "message_text" => $row[3],
+//            "send_date" => $row[4]
+//        ];
+//    }
+//
+//    return array_reverse($messages);
 }
 
 function checkIsLogged(): string {

@@ -12,11 +12,11 @@
     </form>
 
 <?php
-global $link;
+global $conn;
 
 if (isset($_POST["message"])) {
     $message = $_POST["message"]
-        ? trim(mysqli_real_escape_string($link, $_POST["message"]))
+        ? trim($_POST["message"])
         : "";
 
     $message = htmlspecialchars($message, ENT_HTML5);

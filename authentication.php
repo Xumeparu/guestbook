@@ -16,14 +16,14 @@
 </label>
 
 <?php
-global $link;
+global $conn;
 
 if (isset($_POST["username"]) && isset($_POST["password"])) {
     $username = $_POST["username"]
-        ? trim(mysqli_real_escape_string($link, $_POST["username"]))
+        ? trim($_POST["username"])
         : "";
     $password = $_POST["password"]
-        ? trim(mysqli_real_escape_string($link, $_POST["password"]))
+        ? trim($_POST["password"])
         : "";
 
     $username = htmlspecialchars($username, ENT_HTML5);
