@@ -40,7 +40,7 @@ if (isset($_POST["message"])) {
                 <?php
                 if(getCurrentUserId() === $message_item["user_id"]) {
                     ?>
-                    <a class="deleteBtn" href="deleteMessage.php?id=<?=$message_item["id"]?>">x</a>
+                    <a class="deleteBtn" href="deleteMessage.php?id=<?=$message_item["message_id"]?>">x</a>
                     <?php
                 }
                 ?></li>

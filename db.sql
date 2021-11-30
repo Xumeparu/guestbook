@@ -1,4 +1,4 @@
-USE guestbookdb;
+`USE guestbookdb;
 
 CREATE TABLE users (
                        id INT NOT NULL AUTO_INCREMENT,
@@ -17,4 +17,4 @@ CREATE TABLE messages (
 
 ALTER TABLE messages
     ADD CONSTRAINT messages_users_id_fk
-        FOREIGN KEY (user_id) REFERENCES users (id);
+        FOREIGN KEY (user_id) REFERENCES users (id);`

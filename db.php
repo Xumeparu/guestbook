@@ -2,7 +2,7 @@
 session_start();
 
 try {
-    $conn = new PDO('mysql:host=localhost;dbname=guestbookdb', 'debian-sys-maint', 'YUOULJpihCP0s1xY');
+    $conn = new PDO('mysql:host=localhost;dbname=vrejxsnx_m1', 'vrejxsnx', 'JXfDAB');
 } catch(PDOException $error) {
     die('<p class="error">' . $error->getMessage() . '</p>');
 }
@@ -48,31 +48,17 @@ function sendMessage($message) {
     ];
     $stmt = $conn->prepare($sql);
     $stmt->execute($params);
-
 }
 
-function getMessages() {
-//    global $conn;
-//    $messages = [];
-//
-//    $sql = "SELECT messages.id, users.id, users.username, messages.message_text, messages.send_date
-//                FROM messages INNER JOIN users
-//                ON messages.user_id = users.id ORDER BY messages.send_date";
-//    $messages = $conn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-//    foreach ($messages as )
-//
-//    $stmt = $conn->prepare($sql);
-//    while ($row = mysqli_fetch_row($result)) {
-//        $messages[] = [
-//            "id" => $row[0],
-//            "user_id" => $row[1],
-//            "username" => $row[2],
-//            "message_text" => $row[3],
-//            "send_date" => $row[4]
-//        ];
-//    }
-//
-//    return array_reverse($messages);
+function getMessages(): array {
+    global $conn;
+
+    $sql = "SELECT messages.id as message_id, users.id as user_id, users.username, messages.message_text, messages.send_date
+                FROM messages INNER JOIN users
+                ON messages.user_id = users.id ORDER BY messages.send_date";
+    $messages = $conn->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+
+    return array_reverse($messages);
 }
 
 function checkIsLogged(): string {
