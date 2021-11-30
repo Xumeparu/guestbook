@@ -180,6 +180,12 @@ footer {
     bottom: 0;
 }
 
+@media screen and (max-width: 800px) {
+    footer {
+        display: none;
+    }
+}
+
 #footer {
     width: 980px;
     height: 70px;
