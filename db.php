@@ -2,7 +2,7 @@
 session_start();
 
 try {
-    $conn = new PDO('mysql:host=localhost;dbname=vrejxsnx_m1', 'vrejxsnx', 'JXfDAB');
+    $conn = new PDO('mysql:host=localhost;dbname=guestbookdb', 'root', '');
 } catch(PDOException $error) {
     die('<p class="error">' . $error->getMessage() . '</p>');
 }
@@ -67,4 +67,16 @@ function checkIsLogged(): string {
 
 function getCurrentUserId() {
     return $_SESSION['user_id'];
+}
+
+function putMouse($mousename, $is_mouse) {
+    global $conn;
+
+    $sql = "INSERT INTO mice (mousename, is_mouse) VALUES (:mousename, :is_mouse)";
+    $params = [
+        ":mousename" => $mousename,
+        ":is_mouse" => $is_mouse
+    ];
+    $stmt = $conn->prepare($sql);
+    $stmt->execute($params);
 }

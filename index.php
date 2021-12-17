@@ -12,5 +12,6 @@
         ?>
     </p>
     <a href="/"><img class="homePage" src="public/images/hi.png" alt="This is logo"></a>
+<?php require_once "mouse.php"; ?>
 <?php require_once "pages/footer.php"; ?>
 

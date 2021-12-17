@@ -37,7 +37,7 @@ li {
     max-height: 30px;
 }
 
-.username {
+.username, .mousename {
     height: 30px;
     width: 200px;
 }
@@ -123,7 +123,7 @@ nav li {
     background: #d26664;
 }
 
-.regBtn {
+.regBtn, .mouseBtn {
     font: 12pt 'Consolas', serif;
 
     height: 30px;
@@ -136,7 +136,7 @@ nav li {
     background: #d26664;
 }
 
-.submitBtn:active, .regBtn:active, .enterBtn:active {
+.submitBtn:active, .regBtn:active, .enterBtn:active, .mouseBtn:active {
     color: #7e7e7e;
 }
 
